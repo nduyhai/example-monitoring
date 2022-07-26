@@ -1,0 +1,31 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      jmx:
+        enabled: ${METRIC_JMX_ENALBED:true}
+        step: 1m
+      prometheus:
+        enabled: true
+        step: 1m
+      logging:
+        enabled: true
+        step: 1m
+    tags:
+      application-name: ${spring.application.name}
+logging:
+  file:
+    name: ${LOGGING_FILE_NAME:example-monitoring}
+    path: ${LOGGING_PATH:/tmp/log}
+  level:
+    org:
+      springframework:
+        transaction: ${LOGGING_LEVEL:DEBUG}
+        security: ${LOGGING_LEVEL:DEBUG}
+        web: ${LOGGING_LEVEL:DEBUG}
